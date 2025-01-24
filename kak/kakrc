@@ -1,0 +1,168 @@
+add-highlighter global/ number-lines -hlcursor
+add-highlighter global/ show-matching
+
+source "%val{config}/plugins/plug.kak/rc/plug.kak"
+plug "andreyorst/plug.kak" noload
+
+# Shades of blue/cyan for normal mode
+set-face global PrimarySelection white,blue+F
+set-face global SecondarySelection black,blue+F
+set-face global PrimaryCursor black,bright-cyan+F
+set-face global SecondaryCursor black,bright-blue+F
+set-face global PrimaryCursorEol black,bright-cyan
+set-face global SecondaryCursorEol black,bright-blue
+
+# Shades of green/yellow for insert mode.
+hook global ModeChange (push|pop):.*:insert %{
+    set-face window PrimarySelection white,green+F
+    set-face window SecondarySelection black,green+F
+    set-face window PrimaryCursor black,bright-yellow+F
+    set-face window SecondaryCursor black,bright-green+F
+    set-face window PrimaryCursorEol black,bright-yellow
+    set-face window SecondaryCursorEol black,bright-green
+}
+
+# Undo colour changes when we leave insert mode.
+hook global ModeChange (push|pop):insert:.* %{
+    unset-face window PrimarySelection
+    unset-face window SecondarySelection
+    unset-face window PrimaryCursor
+    unset-face window SecondaryCursor
+    unset-face window PrimaryCursorEol
+    unset-face window SecondaryCursorEol
+}
+
+# tabs for autocomplete
+hook global InsertCompletionShow .* %{
+  try %{
+    # this command temporarily removes cursors preceded by whitespace;
+    # if there are no cursors left, it raises an error, does not
+    # continue to execute the mapping commands, and the error is eaten
+    # by the `try` command so no warning appears.
+    execute-keys -draft 'h<a-K>\h<ret>'
+    map window insert <tab> <c-n>
+    map window insert <s-tab> <c-p>
+    hook -once -always window InsertCompletionHide .* %{
+      unmap window insert <tab> <c-n>
+      unmap window insert <s-tab> <c-p>
+    }
+  }
+}
+
+# AUTOPAIR
+plug "alexherbo2/auto-pairs.kak"
+enable-auto-pairs
+
+# FZF
+plug "andreyorst/fzf.kak" config %{
+  require-module fzf
+  require-module fzf-grep
+  require-module fzf-file
+} defer fzf %{
+      set-option global fzf_highlight_command "lat -r {}"
+} defer fzf-file %{
+      set-option global fzf_file_command "fd . --no-ignore-vcs"
+} defer fzf-grep %{
+      set-option global fzf_grep_command "fd"
+}
+
+# map -docstring "open fzf" global user f ": fzf-mode<ret>"
+map -docstring "open fzf" global normal <tab> ": fzf-mode<ret>"
+
+# LSP
+eval %sh{kak-lsp}
+lsp-enable
+
+map global user l ':enter-user-mode lsp<ret>' -docstring 'LSP mode'
+map global insert <tab> '<a-;>:try lsp-snippets-select-next-placeholders catch %{ execute-keys -with-hooks <lt>tab> }<ret>' -docstring 'Select next snippet placeholder'
+map global object a '<a-semicolon>lsp-object<ret>' -docstring 'LSP any symbol'
+map global object <a-a> '<a-semicolon>lsp-object<ret>' -docstring 'LSP any symbol'
+map global object f '<a-semicolon>lsp-object Function Method<ret>' -docstring 'LSP function or method'
+map global object t '<a-semicolon>lsp-object Class Interface Struct<ret>' -docstring 'LSP class interface or struct'
+map global object d '<a-semicolon>lsp-diagnostic-object --include-warnings<ret>' -docstring 'LSP errors and warnings'
+map global object D '<a-semicolon>lsp-diagnostic-object<ret>' -docstring 'LSP errors'
+
+hook global WinSetOption filetype=(c) %{
+  lsp-enable-window
+  lsp-inlay-diagnostics-enable global
+}
+
+## enable syntax highlighting for each lang
+# c
+hook global WinSetOption filetype=c %{
+  hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
+  hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
+  hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
+  hook -once -always window WinSetOption filetype=.* %{
+    remove-hooks window semantic-tokens
+  }
+}
+
+# latex
+hook global WinSetOption filetype=latex %{
+    # Compile on save
+      add-highlighter window/ wrap -indent -width 120
+      hook window BufWritePost .* %{ %sh{ latexmk -verbose -synctex=1 -pdf header.tex } }
+}
+
+# SNIPPETS
+plug "occivink/kakoune-snippets"
+
+# POWERLINE
+plug "andreyorst/powerline.kak" defer kakoune-themes %{
+  powerline-theme pastel
+} defer powerline %{
+  powerline-format global "git lsp bufname filetype mode_info lsp line_column position"
+  set-option global powerline_separator_thin ""
+  set-option global powerline_separator ""
+} config %{
+  powerline-start
+}
+
+declare-user-mode surround
+
+define-command declare-surrounding-pair -params 4 -docstring 'declare-surrounding-pair <description> <alias> <opening> <closing>: declare surrounding pair' %{
+  map -docstring %arg{1} global surround %arg{2} "Z\i%arg{3}<esc>\a%arg{4}<esc>Hz,;"
+  map -docstring %arg{1} global surround %arg{3} "Z\i%arg{3}<esc>\a%arg{4}<esc>Hz,;"
+  map -docstring %arg{1} global surround %arg{4} "Z\i%arg{3}<esc>\a%arg{4}<esc>Hz,;"
+}
+
+declare-surrounding-pair 'parenthesis block' b ( )
+declare-surrounding-pair 'brace block' B { }
+declare-surrounding-pair 'bracket block' r [ ]
+declare-surrounding-pair 'angle block' a <lt> <gt>
+declare-surrounding-pair 'quote block' q  \' \'
+declare-surrounding-pair 'double quote block' Q \" \"
+
+map global user s ': enter-user-mode surround<ret>' -docstring 'enter surround mode'
+
+# TMUX
+plug "jbomanson/tmux-kak-info.kak"
+
+declare-user-mode tmux-split
+map global user w ': enter-user-mode tmux-split<ret>' -docstring 'tmux split'
+map global tmux-split  -docstring 'vertical'       v ':tmux-terminal-vertical kak -c %val(session)<ret>'
+map global tmux-split  -docstring 'horizontal'     s ':tmux-terminal-horizontal kak -c %val(session)<ret>'
+
+# KKS
+eval %sh{ kks init }
+map global user -docstring 'terminal'   t ': kks-connect tmux-terminal-horizontal<ret>'
+map global user -docstring 'yazi'       e ': kks-connect tmux-terminal-vertical yazi<ret>'
+map global user -docstring 'copy'       c '<a-|> wl-copy<ret>'
+map global user -docstring 'python'     p ': %sh{ ( { python $kak_buffile; } & ) >/dev/null 2>/dev/null }<ret>'
+
+# unselect on <esc>
+map global normal <esc> ";,"
+map global user -docstring 'comment' / ":comment-line<ret>"
+
+colorscheme monokai
+
+# declare-user-mode kks
+# map global user k ': enter-user-mode kks<ret>' -docstring 'KKS'
+# map global kks -docstring 'files'            f ': kks-connect terminal-popup kks-files<ret>'
+# map global kks -docstring 'buffers'          b ': kks-connect terminal-popup kks-buffers<ret>'
+# map global kks -docstring 'live grep'        g ': kks-connect terminal-popup kks-grep<ret>'
+# map global kks -docstring 'lines in buffer'  l ': kks-connect terminal-popup kks-lines<ret>'
+# map global kks -docstring 'recent files'     r ': kks-connect terminal-popup kks-mru<ret>'
+# map global kks -docstring 'vcs client'       v ': kks-connect terminal-popup lazygit<ret>'
+# map global kks -docstring 'file browser'     h ': kks-connect terminal-panel kks-lf<ret>'
