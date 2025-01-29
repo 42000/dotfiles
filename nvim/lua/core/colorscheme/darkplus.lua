@@ -1,11 +1,11 @@
 local M = {
-    'Mofiqul/vscode.nvim',
+    'martinsione/darkplus.nvim',
     lazy = false,
     priority = 1000,
 }
 
 function M.config()
-   require("vscode").setup()
+   -- require("vscode").setup()
 end
 
 return M

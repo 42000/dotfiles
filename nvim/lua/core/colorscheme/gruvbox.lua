@@ -12,7 +12,7 @@ function M.config()
         underline = true,
         bold = true,
         italic = {
-            strings = true,
+            strings = false,
             emphasis = true,
             comments = true,
             operators = false,
@@ -28,7 +28,7 @@ function M.config()
     palette_overrides = {},
     overrides = {},
     dim_inactive = false,
-    transparent_mode = true,
+    transparent_mode = false,
     })
 end
 

@@ -5,6 +5,7 @@ local M = {
         'williamboman/mason-lspconfig.nvim',
         'neovim/nvim-lspconfig',
         'Hoffs/omnisharp-extended-lsp.nvim',
+        'saghen/blink.cmp',
     },
 }
 
@@ -32,57 +33,23 @@ function M.config()
     end
 
     -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
-    local capabilities = vim.tbl_deep_extend(
-        "force",
-        require('cmp_nvim_lsp').default_capabilities(),
-        {
-            workspace = {
-                didChangeWatchedFiles = {
-                    dynamicRegistration = true,
-                },
-            },
-        })
+    -- local capabilities = vim.tbl_deep_extend(
+    --     "force",
+    --     require('cmp_nvim_lsp').default_capabilities(),
+    --     {
+    --         workspace = {
+    --             didChangeWatchedFiles = {
+    --                 dynamicRegistration = true,
+    --             },
+    --         },
+    --     })
+
+    local capabilities = require('blink.cmp').get_lsp_capabilities()
 
     require("lspconfig").lua_ls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     }
-
-    -- local pid = vim.fn.getpid()
-    -- local dpath = vim.fn.stdpath("data")
-    -- local nvim_lsp = require'lspconfig'
-
-    -- require("lspconfig").omnisharp.setup {
-    --     on_attach = on_attach,
-    --     capabilities = capabilities,
-    --
-    --     cmd = {
-    --         -- 'mono',
-    --         -- '--assembly-loader=strict',
-    --         -- dpath .. "/mason/bin/omnisharp",
-    --         dpath .. "/mason/packages/omnisharp_bin/OmniSharp.exe",
-    --         -- "--languageserver",
-    --         -- '--hostPID',
-    --         -- tostring(pid),
-    --     },
-    --     handlers = {
-    --         ["textDocument/definition"] = require('omnisharp_extended').handler,
-    --     },
-    --     useModernNet = false,
-    --     enable_editorconfig_support = true,
-    --     -- changed
-    --     enable_ms_build_load_projects_on_demand = true,
-    --     -- changed
-    --     enable_roslyn_analyzers = true,
-    --     organize_imports_on_format = false,
-    --     -- changed
-    --     enable_import_completion = true,
-    --     sdk_include_prereleases = true,
-    --     analyze_open_documents_only = false,
-    --
-    --     usemono = true,
-    --     root_dir = require("lspconfig").util.root_pattern("*.csproject", "*.sln"),
-    -- }
 
     require("lspconfig").csharp_ls.setup({
         cmd = {

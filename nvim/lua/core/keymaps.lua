@@ -12,8 +12,8 @@ end
 , {silent=true, desc='Oil buffer'})
 
 -- RIP KAKOUNE
-vim.keymap.set({'n', 'v', 'o', 'x'}, '<A-l>', '$', {silent=true})
-vim.keymap.set({'n', 'v', 'o', 'x'}, '<A-h>', '^', {silent=true})
+-- vim.keymap.set({'n', 'v', 'o', 'x'}, '<A-l>', '$', {silent=true})
+-- vim.keymap.set({'n', 'v', 'o', 'x'}, '<A-h>', '^', {silent=true})
 
 -- source Python
 vim.keymap.set('n', '<leader>p', ':silent !python % & disown<CR>', {silent=true, desc='python source'})
