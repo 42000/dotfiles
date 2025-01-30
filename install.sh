@@ -1,10 +1,23 @@
 #!/bin/bash
 
-# home dir
-cp -r shellScripts $HOME/
-cp -r .oh-my-zsh $HOME/
-cp .zhrc $HOME/
-cp .tmux.conf $HOME/
+# HOME
+ln -s "$(pwd)/.oh-my-zsh" ~
+ln -s "$(pwd)/.tmux.conf" ~
+ln -s "$(pwd)/.zshrc" ~
+ln -s "$(pwd)/shellScripts" ~
 
-# config dir
-cp -r .config $HOME/.config
+# CONFIG
+ln -s "$(pwd)/.mimeapps.list" ~/.config
+ln -s "$(pwd)/nvim" ~/.config
+ln -s "$(pwd)/foot" ~/.config
+ln -s "$(pwd)/hypr" ~/.config
+ln -s "$(pwd)/dunst" ~/.config
+ln -s "$(pwd)/waybar" ~/.config
+ln -s "$(pwd)/swayimg" ~/.config
+ln -s "$(pwd)/zathura" ~/.config
+ln -s "$(pwd)/rofi" ~/.config
+ln -s "$(pwd)/yazi" ~/.config
+ln -s "$(pwd)/tmux" ~/.config
+ln -s "$(pwd)/kak" ~/.config
+ln -s "$(pwd)/kakoune-lsp" ~/.config
+# ln -s "$(pwd)/wezterm" ~/.config
