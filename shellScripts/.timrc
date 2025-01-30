@@ -1,0 +1,25 @@
+#
+# ~/.bashrc
+NOCOL='\033[0m'
+echo -e "\033[7;32mNETWORK MANAGER:\t\033[34mMOUNT/UNMOUNT USB:"
+echo -e "\033[0;32m $ wifi  \t\t\033[34m$ sudo mount /dev/sda1 /media/usb/"
+echo -e "\033[32m $ proxy \t\t\033[34m$ sudo umount /media/usb/"
+echo ''
+echo -e "\033[7;33mCOMMANDES CUSTOM\t\033[35mKitty"
+echo -e "\033[0;33m- kb_layout  \t\t\033[35mOPEN: Ctrl + Shift + F2"
+echo -e "\033[0;33m- waybar_reset\t\t\033[35mRELOAD: Ctrl + Shift + F5"
+echo -e "\033[0;33m- unset_proxy"
+echo ''
+echo -e "\033[7;36mArch User Repository (AUR)\t\033[7;37mPB keyring"
+echo -e "\033[0;36mpour utilier l'AUR:\t\t\033[0;37m- sudo pacman-key --refresh-keys"
+echo -e "\033[0;36m$ git clone (...)"
+echo -e "\033[0;36m$ makepkg --syncdeps"
+echo "$ makepkg --install"
+echo "OU"
+echo "$ sudo pacman -U pkg"
+echo ''
+echo -e "\033[7;31m=========== killall ============"
+echo -e "\033[0;31m$ ps aux | grep [task]"
+echo "EX:"
+echo "  $ ps aux | mozilla"
+echo -e "  $ killall mozilla-bin${NOCOL}"
