@@ -27,6 +27,10 @@ vim.keymap.set({'n', 'v'}, '<C-k>', '<C-u>', {silent=true})
 vim.keymap.set({'x', 'o'}, 'iQ', 'i"', {silent=true})
 vim.keymap.set({'x', 'o'}, 'iq', "i'", {silent=true})
 
+-- AROUND QUOTE
+vim.keymap.set({'x', 'o'}, 'aQ', 'a"', {silent=true})
+vim.keymap.set({'x', 'o'}, 'aq', "a'", {silent=true})
+
 -- vim.cmd("imap <C-e> <C-g>s") -- JE SAIS PAS POURQUOI ÇA MARCHE QUE COMME ÇA??
 -- GÉRÉ DANS VIM-SURROUND
 -- vim.keymap.set('i', '<C-e>', '<C-g>s', {silent=true})
