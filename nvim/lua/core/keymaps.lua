@@ -26,10 +26,12 @@ vim.keymap.set({'n', 'v'}, '<C-k>', '<C-u>', {silent=true})
 -- INSIDE QUOTE
 vim.keymap.set({'x', 'o'}, 'iQ', 'i"', {silent=true})
 vim.keymap.set({'x', 'o'}, 'iq', "i'", {silent=true})
+vim.keymap.set({'x', 'o'}, 'ia', "i<", {silent=true})
 
 -- AROUND QUOTE
 vim.keymap.set({'x', 'o'}, 'aQ', 'a"', {silent=true})
 vim.keymap.set({'x', 'o'}, 'aq', "a'", {silent=true})
+vim.keymap.set({'x', 'o'}, 'aa', "a<", {silent=true})
 
 -- vim.cmd("imap <C-e> <C-g>s") -- JE SAIS PAS POURQUOI ÇA MARCHE QUE COMME ÇA??
 -- GÉRÉ DANS VIM-SURROUND
