@@ -1,6 +1,9 @@
 
 local M = {
     'ziontee113/icon-picker.nvim',
+    dependencies = {
+        'stevearc/dressing.nvim',
+    },
 }
 
 function M.config()

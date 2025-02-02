@@ -2,35 +2,39 @@
 {
     // "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 30, // Waybar height (to be removed for auto height)
+    "height": 25, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
-    "spacing": 4, // Gaps between modules (4px)
+    "spacing": 0, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": [
-        "hyprland/workspaces"
-        // "sway/mode",
-        // "sway/scratchpad",
+        // "hyprland/workspaces"
+        "sway/workspaces",
+        "sway/scratchpad",
+        "sway/window"
         // "custom/media"
     ],
     "modules-center": [
-        "hyprland/window"
+        "sway/mode"
     ],
     "modules-right": [
         // "mpd",
         // "idle_inhibitor",
         "network",
+        "custom/separator",
         // "power-profiles-daemon",
         // "cpu",
         // "memory",
         // "temperature",
         // "backlight",
-        "keyboard-state",
+        // "keyboard-state",
         // "sway/language",
-        "pulseaudio",
         "battery",
-        "battery#bat2",
-        "clock",
-        "tray"
+        "custom/separator",
+        "pulseaudio",
+        "custom/separator",
+        // "battery#bat2",
+        "clock"
+        // "tray"
     ],
     // Modules configuration
     // "sway/workspaces": {
@@ -49,6 +53,12 @@
     //         "default": ""
     //     }
     // },
+    "custom/separator": {
+        "format": "┃",
+        "interval": "once",
+        "tooltip": false
+    },
+
     "keyboard-state": {
         "numlock": true,
         "capslock": false,
@@ -59,7 +69,7 @@
         }
     },
     "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
+        "format": "{}"
     },
     "sway/scratchpad": {
         "format": "{icon} {count}",
@@ -108,7 +118,9 @@
     "clock": {
         "timezone": "France/Paris",
         "tooltip-format": "<big>{:%D}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        // "format-alt": "{:%d-%m-%Y}",
+        "format": "<span foreground='#afafaf'>󰃭 {:%d-%m-%Y</span> 󰥔 %H:%M}"
+
     },
     "cpu": {
         "format": "{usage}% ",
@@ -136,14 +148,15 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% {icon}",
-        "format-full": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
+        "format-time": "<span foreground='#afafaf'>󰔛 {H}:{m}</span>",
+        "format": "{icon} {capacity}% {time}",
+        "format-full": "{icon} {capacity}% {time}",
+        "format-charging": " {capacity}% {time}",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{icon} {capacity}%",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": ["󰁺", "󰁽", "󰁾", "󰂀", "󰁹"]
     },
     "battery#bat2": {
         "bat": "BAT2"
@@ -161,7 +174,7 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-wifi": "󰖩 {essid} ({signalStrength}%)",
         "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
@@ -174,7 +187,7 @@
         "format-bluetooth": "{volume}% {icon}",
         "format-bluetooth-muted": "󰖁 {icon}",
         // "format-muted": "󰖁 {format_source}",
-        "format-muted": "󰖁",
+        "format-muted": "󰖁 {volume}%",
         // "format-source": "{volume}% ",
         // "format-source-muted": "",
         "format-icons": {

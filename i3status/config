@@ -1,0 +1,79 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+        output_format = "i3bar"
+        markup = pango
+        colors = true
+        color_good = "#00ff00"
+        color_degraded = "#ffff00"
+        color_bad = "#ff0000"
+        interval = 5
+}
+
+# order += "ipv6"
+order += "wireless _first_"
+order += "ethernet _first_"
+order += "battery all"
+# order += "disk /"
+# order += "load"
+# order += "memory"
+order += "volume master"
+order += "tztime local"
+
+wireless _first_ {
+        format_up = "󰖩 %essid (%quality)"
+        # format_up = "W: (%quality at %essid) %ip"
+        format_down = "󰖪"
+        # format_down = ""
+}
+
+ethernet _first_ {
+        format_up = "Eth: %ip (%speed)"
+        # format_down = "E: down"
+        format_down = ""
+}
+
+battery all {
+        path=/sys/class/power_supply/%d/uevent
+        format = "%status %percentage </span><span foreground='#afafaf'>󰔛 %remaining</span>"
+        status_chr = "<span foreground='#00ff00'>󰂄"
+        status_bat = "<span foreground='#ffffff'>󰁽"
+        status_unk = "<span foreground='#ffff00'>󰂑"
+        status_full = "<span foreground='#00ff00'>󱈑"
+        # status_low = "<span foreground='#ff000'>󰁺"
+        last_full_capacity = true
+        threshold_type=percentage
+        low_threshold=20
+}
+
+disk "/" {
+        format = "%avail"
+}
+
+load {
+        format = "%1min"
+}
+
+memory {
+        format = "%used | %available"
+        threshold_degraded = "1G"
+        format_degraded = "MEMORY < %available"
+}
+
+tztime local {
+        format = "<span foreground='#afafaf'>󰃭 %Y-%m-%d </span>󰥔 %H:%M:%S"
+}
+
+volume master {
+   format = "<span foreground='#00ff00'> %volume</span>"
+   format_muted = "<span foreground='#ff0000'>󰝟 %volume</span>"
+   device = "default"
+   mixer = "Master"
+   mixer_idx = 0
+}
