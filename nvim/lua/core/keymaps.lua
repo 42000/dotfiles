@@ -1,6 +1,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- OIL NVIM
 vim.keymap.set('n', '<leader>e', function ()
     require("oil").open_float(".")
 end

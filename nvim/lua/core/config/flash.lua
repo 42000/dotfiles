@@ -14,8 +14,17 @@ local M = {
 
 function M.config()
     require("flash").setup({
-        modes = { char = { enabled = false } }
+        modes = { char = { enabled = false } },
+        highlight = {
+            -- show a backdrop with hl FlashBackdrop
+            backdrop = true,
+            -- Highlight the search matches
+            matches = true,
+            -- extmark priority
+            priority = 5000,
+        },
     })
+
     -- require("flash").jump({
     -- remote_op = {
     --     restore = true,

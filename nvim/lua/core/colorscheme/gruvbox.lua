@@ -24,9 +24,11 @@ function M.config()
     invert_tabline = false,
     invert_intend_guides = false,
     inverse = true, -- invert background for search, diffs, statuslines and errors
-    contrast = "hard", -- can be "hard", "soft" or empty string
+    contrast = "dark", -- can be "hard", "soft" or empty string
     palette_overrides = {},
-    overrides = {},
+    overrides = {
+        ["FlashLabel"] = { fg = "#ffffff", bg = "#ff004c" },
+    },
     dim_inactive = false,
     transparent_mode = false,
     })

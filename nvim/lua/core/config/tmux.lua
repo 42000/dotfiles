@@ -22,7 +22,7 @@ function M.config()
             resize_step_x = 3,
 
             -- sets resize steps for y axis
-            resize_step_y = 2,
+            resize_step_y = 1,
         }
     })
 

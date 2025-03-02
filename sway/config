@@ -26,7 +26,7 @@ set $tmux $term tmux
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 
-output * bg /home/tim/Pictures/wallpapers/getimage.jpg fill
+output * bg $HOME/Pictures/wallpapers/getimage.jpg fill
 #
 # Example configuration:
 #
@@ -51,18 +51,18 @@ output * bg /home/tim/Pictures/wallpapers/getimage.jpg fill
 #
 # Example configuration:
 #
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
+input type:touchpad {
+    dwt enabled
+        tap enabled
+        natural_scroll disabled
+        middle_emulation enabled
+}
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 input type:keyboard {
-    xkb_layout us
-    xkb_variant intl
+    xkb_layout us,us
+    xkb_variant ,intl
     xkb_options ctrl:nocaps
     repeat_delay 35
     repeat_delay 230
@@ -85,7 +85,7 @@ input type:keyboard {
 
     # Kill focused window
     bindsym $mod+c kill
-
+    bindsym $mod+space input "type:keyboard" xkb_switch_layout next
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
@@ -136,17 +136,17 @@ input type:keyboard {
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10
-    # Move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace number 1
-    bindsym $mod+Shift+2 move container to workspace number 2
-    bindsym $mod+Shift+3 move container to workspace number 3
-    bindsym $mod+Shift+4 move container to workspace number 4
-    bindsym $mod+Shift+5 move container to workspace number 5
-    bindsym $mod+Shift+6 move container to workspace number 6
-    bindsym $mod+Shift+7 move container to workspace number 7
-    bindsym $mod+Shift+8 move container to workspace number 8
-    bindsym $mod+Shift+9 move container to workspace number 9
-    bindsym $mod+Shift+0 move container to workspace number 10
+    # Move focused container to workspace and move to
+    bindsym $mod+Shift+1 move container to workspace number 1; workspace number 1
+    bindsym $mod+Shift+2 move container to workspace number 2; workspace number 2
+    bindsym $mod+Shift+3 move container to workspace number 3; workspace number 3
+    bindsym $mod+Shift+4 move container to workspace number 4; workspace number 4
+    bindsym $mod+Shift+5 move container to workspace number 5; workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6; workspace number 6
+    bindsym $mod+Shift+7 move container to workspace number 7; workspace number 7
+    bindsym $mod+Shift+8 move container to workspace number 8; workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9; workspace number 9
+    bindsym $mod+Shift+0 move container to workspace number 10; workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
@@ -169,8 +169,8 @@ input type:keyboard {
     # Toggle the current focus between tiling and floating mode
 
     # Swap focus between the tiling area and the floating area
-    bindsym $mod+Shift+space floating toggle
-    bindsym $mod+space focus mode_toggle
+    # bindsym $mod+Shift+space floating toggle
+    # bindsym $mod+space focus mode_toggle
 
     # Move focus to the parent container
     # bindsym $mod+j focus parent
@@ -222,7 +222,14 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
     # Special key to take a screenshot with grim
-    bindsym Print exec grim
+    # bindsym Print exec grim
+
+    set $screenshot HYPRSHOT_DIR=$HOME/Pictures/screenshots/ hyprshot -m
+    bindsym $mod+Print exec $screenshot window
+    bindsym Print exec $screenshot output
+    bindsym $mod+Shift+Print exec $screenshot region
+
+    bindsym $mod+Ctrl+l exec hyprlock
 
 #
 # Status Bar:

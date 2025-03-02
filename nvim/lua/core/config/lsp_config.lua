@@ -16,9 +16,7 @@ function M.config()
             "lua_ls",
             "texlab",
             "clangd",
-            "pylsp"
-            -- "omnisharp",
-            -- "csharp_ls",
+            "pyright",
         }
     })
 
@@ -51,33 +49,17 @@ function M.config()
     capabilities = capabilities,
     }
 
-    require("lspconfig").csharp_ls.setup({
-        cmd = {
-            "csharp-ls",
-        },
-        filetype = {"cs"},
-        root_dir = require("lspconfig").util.root_pattern("*.csproject", "*.sln"),
-
-        on_attach = on_attach,
-        capabilities = capabilities,
-    })
-
     require("lspconfig").texlab.setup {
         on_attach = on_attach,
         capabilities = capabilities,
     }
-
-    -- require("lspconfig").ltex_ls.setup {
-    --     on_attach = on_attach,
-    --     capabilities = capabilities,
-    -- }
 
     require("lspconfig").clangd.setup {
         on_attach = on_attach,
         capabilities = capabilities,
     }
 
-    require("lspconfig").pylsp.setup {
+    require("lspconfig").pyright.setup {
         on_attach = on_attach,
         capabilities = capabilities,
     }

@@ -7,7 +7,18 @@ local M =
 
 function M.config()
     -- VimTeX configuration goes here, e.g.
+    -- vim.g.maplocalleader = ","
+    vim.g.vimtex_compiler_latexmk = {
+        build_metod = 'latexmk',
+        options = {
+            '-pvc',
+            '-xelatex',
+            '-interaction=nonstopmode',
+            '-synctex=1'
+        },
+        }
     vim.g.vimtex_view_method = "zathura"
+    -- vim.g.vimtex_compiler_method = "latexrun"
 end
 
 return M
