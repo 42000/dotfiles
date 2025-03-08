@@ -14,6 +14,16 @@ function M.config()
             -- Instead of true it can also be a list of languages
             additional_vim_regex_highlighting = false,
         },
+
+        ensure_installed = {
+            "yaml",
+            "c",
+            "markdown",
+            "markdown_inline",
+            "bash",
+            "lua",
+            "vim",
+        },
     }
 
     vim.opt.foldmethod = 'expr'

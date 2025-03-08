@@ -25,9 +25,8 @@ function M.config()
     local cpath = vim.fn.stdpath("config")
     wk.add({
             { "<leader>c", group = "config" },
-            { "<leader>cd", ":cd /$HOME/.config/nvim<CR>", desc = "config directory" },
-            { "<leader>ci", ":e /$HOME/.config/nvim/init.lua<CR>", desc = "init.lua" },
-            -- { "<leader>cp", ":e /$HOME/.config/nvim/lua/core/config/bonus.lua<CR>", desc = "plugins.lua" },
+            { "<leader>cd", ":cd" .. cpath .. "<CR>", desc = "config directory" },
+            { "<leader>ci", ":e" .. cpath .. "/init.lua<CR>", desc = "init.lua" },
             { "<leader>cc", ":cd %:h<CR>", desc = "set to current" },
 
             { "<Tab>", group = "fzf" },
