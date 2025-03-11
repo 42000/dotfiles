@@ -151,7 +151,7 @@
         "format-time": "<span foreground='#afafaf'>󰔛 {H}:{m}</span>",
         "format": "{icon} {capacity}% {time}",
         "format-full": "{icon} {capacity}% {time}",
-        "format-charging": " {capacity}% {time}",
+        "format-charging": "󰂄 {capacity}% {time}",
         "format-plugged": " {capacity}%",
         "format-alt": "{icon} {capacity}%",
         // "format-good": "", // An empty format will hide the module
@@ -191,7 +191,7 @@
         // "format-source": "{volume}% ",
         // "format-source-muted": "",
         "format-icons": {
-            "headphone": "",
+            "headphone": "󰋋",
             "hands-free": "",
             "headset": "",
             "phone": "",
