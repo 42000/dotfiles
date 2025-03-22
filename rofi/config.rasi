@@ -2,7 +2,7 @@
 
 // Il faut le faire dans ce sens
 * {
-    font:            "Terminus (TTF) 12";
+    font:            "IBM Plex Mono";
 }
 
 configuration {

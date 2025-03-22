@@ -23,7 +23,8 @@ function M.config()
 
             -- sets resize steps for y axis
             resize_step_y = 1,
-        }
+        },
+        copy_sync = { enable = false }
     })
 
     vim.keymap.set({'n', 'v', 'i'}, '<A-l>',function() require('tmux').move_right() end, {silent=true})

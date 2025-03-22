@@ -69,7 +69,7 @@ function M.config()
         },
     })
 
-    vim.cmd.colorscheme = 'solarized'
+    -- vim.cmd.colorscheme = 'solarized'
 end
 
 return M
