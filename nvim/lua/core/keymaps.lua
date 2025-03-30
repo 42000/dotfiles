@@ -24,16 +24,20 @@ vim.keymap.set({'n', 'v'}, '<leader>?', ':noh<CR>', {silent=true})
 vim.keymap.set({'n', 'v'}, '<C-j>', '<C-d>', {silent=true})
 vim.keymap.set({'n', 'v'}, '<C-k>', '<C-u>', {silent=true})
 
--- INSIDE QUOTE
-vim.keymap.set({'x', 'o'}, 'iQ', 'i"', {silent=true})
-vim.keymap.set({'x', 'o'}, 'iq', "i'", {silent=true})
-vim.keymap.set({'x', 'o'}, 'ia', "i<", {silent=true})
-
--- AROUND QUOTE
-vim.keymap.set({'x', 'o'}, 'aQ', 'a"', {silent=true})
-vim.keymap.set({'x', 'o'}, 'aq', "a'", {silent=true})
-vim.keymap.set({'x', 'o'}, 'aa', "a<", {silent=true})
-
+-- INSIDE/AROUND QUOTE
+-- vim.cmd('onoremap iQ i"')
+-- vim.cmd("onoremap iq i'")
+-- vim.cmd("onoremap ia i<")
+-- vim.cmd('onoremap aQ a"')
+-- vim.cmd("onoremap aq a'")
+-- vim.cmd("onoremap aa a<")
+vim.keymap.set({'x','o'}, 'iQ', 'i"', {noremap=true, desc="inner \""})
+vim.keymap.set({'x','o'}, 'iq', "i'", {noremap=true, desc="inner '"})
+vim.keymap.set({'x','o'}, 'ia', "i<", {noremap=true, desc="inner <>"})
+vim.keymap.set({'x','o'}, 'aQ', 'a"', {noremap=true, desc="around \""})
+vim.keymap.set({'x','o'}, 'aq', "a'", {noremap=true, desc="around '"})
+vim.keymap.set({'x','o'}, 'aa', "a<", {noremap=true, desc="around <>"})
+-- abadsj ljdls dj "sl djls" <jdljldsjdls> {dsdsd} (dsdsd)
 -- vim.cmd("imap <C-e> <C-g>s") -- JE SAIS PAS POURQUOI ÇA MARCHE QUE COMME ÇA??
 -- GÉRÉ DANS VIM-SURROUND
 -- vim.keymap.set('i', '<C-e>', '<C-g>s', {silent=true})

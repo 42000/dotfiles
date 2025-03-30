@@ -38,4 +38,6 @@ vim.opt.cmdheight = 1
 vim.opt.spelllang = 'fr'
 
 vim.opt.virtualedit = "block"
+
+-- vim.opt.winborder = "single" -- gros curseur degueu
 -- vim.opt.list = true -- montre les tabs + blankspace

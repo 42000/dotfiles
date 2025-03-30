@@ -4,7 +4,7 @@ local M = {
     dependencies = {
         'williamboman/mason-lspconfig.nvim',
         'neovim/nvim-lspconfig',
-        'Hoffs/omnisharp-extended-lsp.nvim',
+        -- 'Hoffs/omnisharp-extended-lsp.nvim',
         'saghen/blink.cmp',
     },
 }
