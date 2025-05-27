@@ -5,6 +5,7 @@ ln -s "$(pwd)/.oh-my-zsh" ~
 ln -s "$(pwd)/.tmux.conf" ~
 ln -s "$(pwd)/.zshrc" ~
 ln -s "$(pwd)/shellScripts" ~
+ln -s "$(pwd)/zsh" ~
 
 # CONFIG
 ln -s "$(pwd)/.mimeapps.list" ~/.config
