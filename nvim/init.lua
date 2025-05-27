@@ -6,6 +6,7 @@ spec "core.config.vim-surround"
 spec "core.config.comment"
 spec "core.config.autopair"
 spec "core.config.flash"
+spec "core.config.vim-easy-align"
 
 -- UI EN +
 spec "core.config.oil"

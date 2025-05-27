@@ -5,6 +5,7 @@ ENSURED_LSP = {
     "texlab",
     "clangd",
     "pyright",
+    "vhdl_ls",
 }
 
 spec "core.config.lsp-color"
@@ -24,11 +25,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.diagnostic.config({ virtual_text = true })
 
 -- FZF-LUA :
-vim.keymap.set('n', 'grd', vim.lsp.buf.definition, {desc = 'definition'})
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {desc = 'lsp definition'})
 vim.keymap.set('n', 'gra', ":FzfLua lsp_code_actions<CR>", {desc = 'code action'})
 vim.keymap.set('n', 'gri', ":FzfLua lsp_implementations<CR>", {desc = 'implementations'})
 vim.keymap.set('n', 'grr', ":FzfLua lsp_references<CR>", {desc = 'references'})
-vim.keymap.set('n', 'grn', vim.lsp.buf.rename, {desc = 'rename'})
+vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, {desc = 'lsp rename'})
 
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
 

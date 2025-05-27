@@ -18,6 +18,7 @@ function M.config()
     lspc.clangd.setup{}
     lspc.pyright.setup{}
     lspc.texlab.setup{}
+    lspc.vhdl_ls.setup{}
 
     vim.lsp.enable(ENSURED_LSP)
     -- vim.lsp.enable({'lua_ls'})
