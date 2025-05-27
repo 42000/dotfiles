@@ -14,25 +14,42 @@ alias xopen="xOpen"
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your Oh My Zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+# export ZSH="$HOME/.oh-my-zsh"
 export EDITOR="nvim"
 export VISUAL="nvim"
-ZSH_THEME="terminalparty"
+# ZSH_THEME="terminalparty"
 # SOLARIZED_THEME="dark"
 
 ENABLE_CORRECTION="true"
 plugins=(
     git
-    zsh-autosuggestions
+    # zsh-autosuggestions
     # zsh-syntax-highlighting
-    fast-syntax-highlighting
+    # fast-syntax-highlighting
     # zsh-autocomplete
 )
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
+bindkey -e
 
-# Set up fzf key bindings and fuzzy completion
+source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source $HOME/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+
+# TAB KEYS + ENTER
+bindkey              '^I'         menu-complete
+bindkey "$terminfo[kcbt]" reverse-menu-complete
+bindkey              '^I' menu-select
+bindkey "$terminfo[kcbt]" menu-select
+bindkey -M menuselect              '^I'         menu-complete
+bindkey -M menuselect "$terminfo[kcbt]" reverse-menu-complete
+bindkey -M menuselect '^M' .accept-line
+
+setopt PROMPT_SUBST
+PROMPT='%F{green} %%%f '
+RPROMPT='%~ %B%F{blue}%m%b%f'
+
 source <(fzf --zsh)
+export QSYS_ROOTDIR="/home/tim/intelFPGA_lite/24.1std/quartus/sopc_builder/bin"
 
 # User configuration
 
@@ -71,3 +88,4 @@ source <(fzf --zsh)
 # PERL_LOCAL_LIB_ROOT="/home/tim/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 # PERL_MB_OPT="--install_base \"/home/tim/perl5\""; export PERL_MB_OPT;
 # PERL_MM_OPT="INSTALL_BASE=/home/tim/perl5"; export PERL_MM_OPT;
+
