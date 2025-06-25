@@ -6,6 +6,7 @@ ENSURED_LSP = {
     "clangd",
     "pyright",
     "vhdl_ls",
+    "asm_lsp",
 }
 
 spec "core.config.lsp-color"
