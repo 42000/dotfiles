@@ -9,7 +9,7 @@ spec "core.config.flash"
 spec "core.config.vim-easy-align"
 
 -- UI EN +
-spec "core.config.oil"
+-- spec "core.config.oil"
 spec "core.config.icon-picker"
 spec "core.config.fzf"
 spec "core.config.which-key"

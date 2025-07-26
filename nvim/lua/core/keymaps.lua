@@ -1,23 +1,18 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- OIL NVIM
-vim.keymap.set('n', '<leader>e', function ()
-    require("oil").open_float(".")
-end
-, {silent=true, desc='Oil pwd'})
+-- netrw
+vim.keymap.set({'n','v'}, '<leader>e', ':Explore<CR>', {desc='netrw', silent=true})
 
-vim.keymap.set('n', '<leader>w', function ()
-    require("oil").open_float()
-end
-, {silent=true, desc='Oil buffer'})
+-- tabs
+vim.keymap.set({'n','v'}, '<leader>t', ':tabnew<CR>', {desc='new tab', silent=true})
 
 -- RIP KAKOUNE
 -- vim.keymap.set({'n', 'v', 'o', 'x'}, '<A-l>', '$', {silent=true})
 -- vim.keymap.set({'n', 'v', 'o', 'x'}, '<A-h>', '^', {silent=true})
 
 -- source Python
-vim.keymap.set('n', '<leader>p', ':silent !python % & disown<CR>', {silent=true, desc='python source'})
+-- vim.keymap.set('n', '<leader>p', ':silent !python % & disown<CR>', {silent=true, desc='python source'})
 
 vim.keymap.set({'n', 'v'}, '<leader>?', ':noh<CR>', {silent=true})
 
@@ -45,6 +40,11 @@ vim.keymap.set('n', '<leader>s','', {silent=true, desc='spell'})
 vim.keymap.set('n', '<leader>ss',':set spell!<CR>',{silent=true, desc='toggle'})
 vim.keymap.set('n', '<leader>sf',':set spelllang=fr<CR>',{silent=true, desc='fr'})
 vim.keymap.set('n', '<leader>se',':set spelllang=en<CR>',{silent=true, desc='en'})
+
+-- BufNext/Prev
+vim.keymap.set({'i','n','v'}, '<C-n>',':bNext<CR>', {silent=true, desc='buffer next'})
+vim.keymap.set({'i','n','v'}, '<C-p>',':bprevious<CR>', {silent=true, desc='buffer prev'})
+vim.keymap.set({'n','v'}, '<BS>', '<C-^>', {desc='buf Switch', silent=true})
 
 -- vim.keymap.set({'n','v'}, 'j', 'gj', {silent=true})
 -- vim.keymap.set({'n','v'}, 'k', 'gk', {silent=true})

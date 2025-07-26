@@ -41,3 +41,6 @@ vim.opt.virtualedit = "block"
 
 -- vim.opt.winborder = "single" -- gros curseur degueu
 -- vim.opt.list = true -- montre les tabs + blankspace
+
+-- Line numbers etc in Netrw
+vim.cmd([[let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro']])
